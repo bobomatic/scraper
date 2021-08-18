@@ -17,6 +17,7 @@ This project is a demonstration of web scraping using beautiful soup. The module
 This project is created with
 
 Beautifulsoup4
+
 grequests - asynchronous http requests
 
 ## Setup
