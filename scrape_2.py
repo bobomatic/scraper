@@ -3,18 +3,25 @@ import grequests  # use grequests instead of request for multiple pages
 from bs4 import BeautifulSoup
 import pprint  # pretty print
 
-"""Scrape 2 pages of hacker news"""
+"""Scrape multiple pages of hacker news"""
 
+# list of urls to scrape
 urls = ['https://news.ycombinator.com/news?p=1', 'https://news.ycombinator.com/news?p=2']
-unsent_request = (grequests.get(url) for url in urls)
-response = grequests.map(unsent_request)
 
-# iterate over the pages in response
-links, subtext = [], []
-for res in response:
-    soup = BeautifulSoup(res.text, 'html.parser')
-    links += soup.select('.storylink')
-    subtext += soup.select('.subtext')
+
+def scrape(urls):
+    """Iterate over list of urls (multiple html pages) and return list of link tags and subtext tags
+    """
+    unsent_request = (grequests.get(url) for url in urls)
+    response = grequests.map(unsent_request)
+
+    # iterate over the pages in response
+    links, subtext = [], []
+    for res in response:
+        soup = BeautifulSoup(res.text, 'html.parser')
+        links += soup.select('.storylink')
+        subtext += soup.select('.subtext')
+    return links, subtext
 
 
 def sort_by_votes(hn):
@@ -26,6 +33,9 @@ def sort_by_age(hn):
 
 
 def create_custom_hackernews(links, subtext):
+    """ Extract title and links from link tag. Extract votes and age from subtext tags
+        Add to dictionary hn if points > 100.
+    """
     hn = []
     for idx, item in enumerate(links):
 
@@ -41,6 +51,7 @@ def create_custom_hackernews(links, subtext):
     return hn
 
 
+links, subtext = scrape(urls)
 hnlist = (create_custom_hackernews(links, subtext))
 print(f'{len(hnlist)} stories found with votes >100. Printing in order of upvotes first:')
 pprint.pprint(sort_by_votes(hnlist))
