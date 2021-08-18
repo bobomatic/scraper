@@ -1,5 +1,5 @@
 # scraper
-Code that scrapes a news website and puts the stories into a dictionary for display
+Python code that scrapes a news website and puts the stories into a dictionary for display
 
 ## Table of contents
 * [General info](#general-info)
@@ -15,6 +15,8 @@ This project is a demonstration of web scraping using beautiful soup. The module
 
 ## Technologies
 This project is created with
+
+Python 3.8
 
 Beautifulsoup4
 
