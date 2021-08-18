@@ -51,12 +51,17 @@ scrape2.py
 
 Stories from page 1&2 with >100 votes are displayed in the terminal
 
-The following options are available:
-* no options available
+If the functions are imported (import scrape_2) then scrape(urls) will provide a list of link and subtext tags 
+(where urls is a list of urls). A custom function such as create_custom_hackernews can then be used to extract the news stories, links etc into a dictionary for display.
 
 Code example:
 
+Command line
 `python3 scrape2.py`
+
+Import
+`import scrape2
+links, subtext = scrape(urls)`
 
 ## Status
 Basic scraping functionality is complete.
