@@ -57,9 +57,9 @@ If the functions are imported (import scrape_2) then scrape(urls) will provide a
 Code example:
 
 Command line
-`python3 scrape2.py`
+`$ python3 scrape2.py`
 
-Import
+Import module
 `import scrape2
 links, subtext = scrape(urls)`
 
